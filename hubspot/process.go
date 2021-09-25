@@ -2,8 +2,6 @@ package main
 
 import "fmt"
 
-func do(){
-
-  fmt.Println("a")
-
+func printme(a string){
+  fmt.Println(a)
 }
