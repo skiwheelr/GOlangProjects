@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/kr/pretty"
 	"io/ioutil"
@@ -10,15 +9,20 @@ import (
 
 func main() {
 	//fmt.Println("Hello, the time is ",time.Now())
-	getCall()
+	retval := getCall()
+	// fmt.Println(retval)
+	// getpt(retval)
+	// getptmap(retval)
+	temppair := getptgj(retval)
+	// fmt.Println(temppair)
+	cval := multiplytemp(temppair)
+	fmt.Println("Temp in Centigrade is", cval)
+
+
 }
 
-
-type Location struct {
-	Name string
-}
-
-func getCall() {
+func getCall() string {
+	jsondata := string("n/a")
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", "https://api.weatherapi.com/v1/current.json", nil)
 	//req.Header.Add("Accept", "application/json")
@@ -34,14 +38,9 @@ func getCall() {
 	} else {
 		//defer response.Body.Close()
 		data, _ := ioutil.ReadAll(response.Body)
-		jsondata := string(data)
-		fmt.Println(jsondata)
-		//works until this point
-
-		var rep Location
-
-		json.Unmarshal(byte(jsondata['location']), &rep)
-		pretty.Println(rep)
-
+		jsondata = string(data)
+		pretty.Println("Json Received")
+		// pretty.Println(jsondata)
 	}
+	return jsondata
 }
