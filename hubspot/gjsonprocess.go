@@ -3,6 +3,7 @@ package main
 import(
   "fmt"
   "github.com/tidwall/gjson"
+
 )
 
 const jsonx = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
@@ -13,18 +14,19 @@ func getexample() {
 }
 
 func getptgj(jsondata string) map[string]float64 {
-  namevalue := gjson.Get(jsondata, "location.name")
+  namevalue := "city" //gjson.Get(jsondata, "location.name")
   tempvalue := gjson.Get(jsondata, "current.temp_f")
   var wepair = make(map[string]float64)
-  wepair[namevalue.String()] = tempvalue.Float()
+  wepair[namevalue] = tempvalue.Float()
   return wepair
 }
 
-func multiplytemp(wepair2 map[string]float64) float64 {
-  ftemp := wepair2["Henderson"]
+func multiplytemp(wepair2 map[string]float64) string {
+  ftemp := wepair2["city"]
   fmt.Println("FTemp in City is", ftemp)
   ctemp := (ftemp-30.0)/2.0
-  return ctemp
+  ctempString := fmt.Sprintf("%f", ctemp)
+  return ctempString
 }
 
 
