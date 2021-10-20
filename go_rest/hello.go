@@ -16,7 +16,7 @@ func main() {
 
 type User struct {
 	Name string
-	id int8
+	// id int8
 }
 
 func getCall() {
@@ -26,12 +26,14 @@ func getCall() {
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 		jsondata := string(data)
+		// fmt.Print(jsondata)
 		var users []User
 		json.Unmarshal([]byte(jsondata), &users)
 		//fmt.Printf("Users: %+v", users)
-		users[0].Name = "Mark Wagner"
-		users[0].id = 100
+		// users[0].Name = "Mark Wagner"
+		// users[0].id = 100
 		pretty.Println(users)
+		// fmt.Print(users)
 	}
 }
 
@@ -50,5 +52,3 @@ Hello, the time is  2020-04-10 00:47:18.21 -0700 MST m=+0.000628811
 {Name:"Glenna Reichert", id:0},
 {Name:"Clementina DuBuque", id:0},
 }*/
-
-
